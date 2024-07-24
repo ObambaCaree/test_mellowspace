@@ -138,16 +138,10 @@ function livelyPropertyListener(name, val) {
 
 //web
 function createWebUI() {
-  let snow = gui.addFolder("Snow");
   let bg = gui.addFolder("Background");
   let misc = gui.addFolder("More");
-  snow.open();
   bg.open();
   misc.open();
-  snow.add(material.uniforms.u_layers, "value", 0, 200, 1).name("Layers");
-  snow.add(material.uniforms.u_depth, "value", 0, 10, 0.01).name("Depth");
-  snow.add(material.uniforms.u_width, "value", 0, 10, 0.01).name("Width");
-  snow.add(material.uniforms.u_speed, "value", 0, 10, 0.01).name("Speed");
   bg.add(
     {
       picker: function () {
@@ -161,26 +155,6 @@ function createWebUI() {
   bg.add(material.uniforms.u_texture_fill, "value").name("Scale to Fill");
   bg.add(material.uniforms.u_post_processing, "value").name("Post Processing");
   misc.add(settings, "fps", 15, 120, 15).name("FPS");
-  misc
-    .add(
-      {
-        lively: function () {
-          window.open("https://www.rocksdanister.com/lively");
-        },
-      },
-      "lively"
-    )
-    .name("Try It On Your Desktop!");
-  misc
-    .add(
-      {
-        source: function () {
-          window.open("https://github.com/rocksdanister/snow");
-        },
-      },
-      "source"
-    )
-    .name("Source Code");
   gui.close();
 }
 
