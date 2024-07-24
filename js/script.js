@@ -15,31 +15,6 @@ async function init() {
   scene = new THREE.Scene();
   camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
-  material = new THREE.ShaderMaterial({
-    uniforms: {
-      u_tex0: { type: "t" },
-      u_time: { value: 0, type: "f" },
-      u_depth: { value: 0.5, type: "f" },
-      u_width: { value: 0.3, type: "f" },
-      u_speed: { value: 0.6, type: "f" },
-      u_layers: { value: 50, type: "i" },
-      u_blur_intensity: { value: 0.3, type: "f" },
-      u_texture_fill: { value: true, type: "b" },
-      u_post_processing: { value: true, type: "b" },
-      u_mouse: { value: new THREE.Vector4(), type: "v4" },
-      u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight), type: "v2" },
-      u_tex0_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight), type: "v2" },
-    },
-    vertexShader: `
-          varying vec2 vUv;        
-          void main() {
-              vUv = uv;
-              gl_Position = vec4( position, 1.0 );    
-          }
-        `,
-  });
-  material.fragmentShader = await (await fetch("shaders/snow.frag")).text();
-
   new THREE.TextureLoader().load("media/image.jpg", function (tex) {
     material.uniforms.u_tex0_resolution.value = new THREE.Vector2(tex.image.width, tex.image.height);
     material.uniforms.u_tex0.value = tex;
